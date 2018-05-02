@@ -53,6 +53,20 @@ public class SellerRepository {
         }
     }
 
+    public void removeByArticle(String article) {
+        try (Connection connection = DriverManager.getConnection(url)) {
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE article=?;")) {
+
+                statement.setString(1, article);
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
 

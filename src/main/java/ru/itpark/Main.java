@@ -8,16 +8,16 @@ public class Main {
 
         SellerRepository repository = new SellerRepository("jdbc:sqlite:db.sqlite3");
 
-        repository.add(
-                new Item(
-                        "QWER1234",
-                        "Notebook",
-                        100,
-                        25
-                )
-        );
+//        repository.add(
+//                new Item(
+//                        "QWER1234",
+//                        "Notebook",
+//                        100,
+//                        25
+//                )
+//        );
 
-        System.out.println(repository.findAll());
+//        System.out.println(repository.findAll());
 
 
         repository.update(
@@ -30,5 +30,17 @@ public class Main {
         );
 
 
+        repository.add(
+                new Item(
+                        "ZXCV5555",
+                        "Кроссовки спорт",
+                        999,
+                        3
+                )
+        );
+
+        System.out.println(repository.findAll());
+
+        repository.removeByArticle("ZXCV5555");
     }
 }
