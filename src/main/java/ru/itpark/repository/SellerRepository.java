@@ -95,6 +95,35 @@ public class SellerRepository {
         return items;
     }
 
+    public List<Item> findByName(String name) {
+        List<Item> list = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(url)) {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT article, name, price, quantity FROM items WHERE LOWER(name) LIKE ?;")) {
+
+                statement.setString(1, "%" + name.toLowerCase() + "%");
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+
+                    list.add(
+                            new Item(
+                                    resultSet.getString("article"),
+                                    resultSet.getString("name"),
+                                    resultSet.getInt("price"),
+                                    resultSet.getInt("quantity")
+                            )
+                    );
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
     public List<Item> sortAllByNameASC() {
         List<Item> items = new ArrayList<>();
 

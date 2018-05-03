@@ -8,38 +8,38 @@ public class Main {
 
         SellerRepository repository = new SellerRepository("jdbc:sqlite:db.sqlite3");
 
-        repository.add(
-                new Item(
-                        "QWER1234",
-                        "Notebook",
-                        100,
-                        25
-                )
-        );
+//        repository.add(
+//                new Item(
+//                        "QWER1234",
+//                        "Notebook",
+//                        100,
+//                        25
+//                )
+//        );
 
 //        System.out.println(repository.findAll());
 
 
-        repository.update(
-                new Item(
-                        "QWER1234",
-                        "Notebook A6",
-                        55,
-                        5
-                )
-        );
+//        repository.update(
+//                new Item(
+//                        "QWER1234",
+//                        "Notebook A6",
+//                        55,
+//                        5
+//                )
+//        );
+//
+//
+//        repository.add(
+//                new Item(
+//                        "ZXCV5555",
+//                        "Кроссовки спорт",
+//                        999,
+//                        3
+//                )
+//        );
 
-
-        repository.add(
-                new Item(
-                        "ZXCV5555",
-                        "Кроссовки спорт",
-                        999,
-                        3
-                )
-        );
-
-        System.out.println(repository.findAll());
+//        System.out.println(repository.findAll());
 
 //        repository.removeByArticle("ZXCV5555");
 
@@ -79,12 +79,12 @@ public class Main {
 //                )
 //        );
 
-        System.out.println(repository.sortAllByNameASC());
-        System.out.println(repository.sortAllByNameDESC());
-        System.out.println(repository.sortAllByQuantityASC());
-        System.out.println(repository.sortAllByQuantityDESC());
-        System.out.println(repository.sortAllByPriceASC());
-        System.out.println(repository.sortAllByPriceDESC());
-
+//        System.out.println(repository.sortAllByNameASC());
+//        System.out.println(repository.sortAllByNameDESC());
+//        System.out.println(repository.sortAllByQuantityASC());
+//        System.out.println(repository.sortAllByQuantityDESC());
+//        System.out.println(repository.sortAllByPriceASC());
+//        System.out.println(repository.sortAllByPriceDESC());
+        System.out.println(repository.findByName("sven"));
     }
 }
