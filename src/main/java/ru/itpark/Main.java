@@ -1,6 +1,5 @@
 package ru.itpark;
 
-import ru.itpark.domain.Item;
 import ru.itpark.repository.SellerRepository;
 
 public class Main {
@@ -79,12 +78,17 @@ public class Main {
 //                )
 //        );
 
-//        System.out.println(repository.sortAllByNameASC());
-//        System.out.println(repository.sortAllByNameDESC());
-//        System.out.println(repository.sortAllByQuantityASC());
-//        System.out.println(repository.sortAllByQuantityDESC());
-//        System.out.println(repository.sortAllByPriceASC());
-//        System.out.println(repository.sortAllByPriceDESC());
+        System.out.println(repository.sortAllByNameASC());
+        System.out.println(repository.sortAllByNameDESC());
+        System.out.println(repository.sortAllByQuantityASC());
+        System.out.println(repository.sortAllByQuantityDESC());
+        System.out.println(repository.sortAllByPriceASC());
+        System.out.println(repository.sortAllByPriceDESC());
         System.out.println(repository.findByName("sven"));
+//        System.out.println(repository.Sale("LKJH4567"));
+
+
+
+
     }
 }
