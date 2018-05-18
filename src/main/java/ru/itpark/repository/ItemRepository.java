@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SellerRepository {
+public class ItemRepository {
 
     private String url;
 
-    public SellerRepository(String url) {
+    public ItemRepository(String url) {
         this.url = url;
         init();
     }
@@ -32,6 +32,7 @@ public class SellerRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void update(Item item) {

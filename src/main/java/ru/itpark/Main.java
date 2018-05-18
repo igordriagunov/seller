@@ -1,11 +1,14 @@
 package ru.itpark;
 
-import ru.itpark.repository.SellerRepository;
+import ru.itpark.domain.Sale;
+import ru.itpark.repository.ItemRepository;
+import ru.itpark.repository.SaleRepository;
 
 public class Main {
     public static void main(String[] args) {
 
-        SellerRepository repository = new SellerRepository("jdbc:sqlite:db.sqlite3");
+        ItemRepository itemRepository = new ItemRepository("jdbc:sqlite:db.sqlite3");
+        SaleRepository saleRepository = new SaleRepository("jdbc:sqlite:db.sqlite3");
 
 //        repository.add(
 //                new Item(
@@ -78,17 +81,24 @@ public class Main {
 //                )
 //        );
 
-        System.out.println(repository.sortAllByNameASC());
-        System.out.println(repository.sortAllByNameDESC());
-        System.out.println(repository.sortAllByQuantityASC());
-        System.out.println(repository.sortAllByQuantityDESC());
-        System.out.println(repository.sortAllByPriceASC());
-        System.out.println(repository.sortAllByPriceDESC());
-        System.out.println(repository.findByName("sven"));
+//        System.out.println(repository.sortAllByNameASC());
+//        System.out.println(repository.sortAllByNameDESC());
+//        System.out.println(repository.sortAllByQuantityASC());
+//        System.out.println(repository.sortAllByQuantityDESC());
+//        System.out.println(repository.sortAllByPriceASC());
+//        System.out.println(repository.sortAllByPriceDESC());
+//        System.out.println(repository.findByName("sven"));
 //        System.out.println(repository.Sale("LKJH4567"));
 
 
+//        saleRepository.addSale(
+//                new Sale(
+//                        "QWER1234",
+//                        10
+//                )
+//        );
 
+        System.out.println(saleRepository.saleGroupByItemArticle());
 
     }
 }
