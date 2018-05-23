@@ -1,6 +1,5 @@
 package ru.itpark.repository;
 
-import ru.itpark.domain.Item;
 import ru.itpark.domain.Sale;
 
 import java.sql.*;
@@ -81,16 +80,16 @@ public class SaleRepository {
 
     }
 
-    public void deductQtyFromItems (Item item) {
+    public void deductQtyFromItems (Sale sale) {
 
         try (Connection connection = DriverManager.getConnection(url)) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE items SET quantity= quantity - ? WHERE article=?;")){
 
-                statement.setInt(1,item.getQuantity());
+                statement.setInt(1,sale.getSaleQuantity());
 //                statement.setString(2,item.getName());
 //                statement.setInt(3,item.getPrice());
-                statement.setString(2,item.getArticle());
+                statement.setString(2,sale.getItemArticle());
 
                 statement.executeUpdate();
             }

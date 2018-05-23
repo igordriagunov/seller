@@ -5,7 +5,6 @@ import ru.itpark.domain.Sale;
 import ru.itpark.repository.ItemRepository;
 import ru.itpark.repository.SaleRepository;
 
-import javax.xml.parsers.SAXParser;
 import java.util.List;
 
 public class SellerService {
@@ -71,4 +70,7 @@ private final SaleRepository saleRepository;
         return saleRepository.saleGroupByItemArticle();
     }
 
+    public void deductQtyFromItems(Sale sale) {
+        saleRepository.deductQtyFromItems(sale);
+    }
 }
