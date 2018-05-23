@@ -14,36 +14,19 @@ public class SaleRepository {
     public SaleRepository(String url) {
         this.url = url;
         initSales();
-        initResult();
     }
 
-    private void initResult() {
-
-        try (Connection connection = DriverManager.getConnection(url)) {
-            try (Statement statement = connection.createStatement()) {
-                statement.execute("CREATE table if not exists result (\n" +
-                        "resultId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,\n" +
-                        "resultItemArticle TEXT NOT NULL ,\n" +
-                        "resultSaleQuantity INTEGER CHECK (resultSaleQuantity >= 0)" +
-                        ");\n"
-                );
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void initSales() {
 
         try (Connection connection = DriverManager.getConnection(url)) {
             try (Statement statement = connection.createStatement()) {
                 statement.execute("CREATE table if not exists sales (\n" +
-                        "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,\n" +
+                        "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                         "itemArticle TEXT NOT NULL,\n" +
-                        "saleQuantity INTEGER CHECK (saleQuantity >= 0)" +
-                        ");\n"
-                );
+                        "saleQuantity INTEGER CHECK (saleQuantity >= 0),\n" +
+                        "FOREIGN KEY (saleQuantity) REFERENCES items(quantity)\n" +
+                        ");");
             }
 
         } catch (SQLException e) {
@@ -57,7 +40,7 @@ public class SaleRepository {
         try (Connection connection = DriverManager.getConnection(url)) {
             try (PreparedStatement statement =
                          connection.prepareStatement(
-                                 "INSERT INTO sales (itemArticle, saleQuantity) VALUES (?,?) ")) {
+                                 "INSERT INTO sales (itemArticle, saleQuantity) VALUES (?,?)")) {
 
                 statement.setString(1, sale.getItemArticle());
                 statement.setInt(2, sale.getSaleQuantity());
@@ -69,7 +52,7 @@ public class SaleRepository {
         }
     }
 
-    public List<Sale> saleGroupByItemArticle () {
+    public List<Sale> saleGroupByItemArticle() {
         List<Sale> list = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(url)) {
@@ -96,6 +79,26 @@ public class SaleRepository {
 
         return list;
 
+    }
+
+    public void deductQtyFromItems (Item item) {
+
+        try (Connection connection = DriverManager.getConnection(url)) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE items SET quantity= quantity - ? WHERE article=?;")){
+
+                statement.setInt(1,item.getQuantity());
+//                statement.setString(2,item.getName());
+//                statement.setInt(3,item.getPrice());
+                statement.setString(2,item.getArticle());
+
+                statement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Проверьте количество товара");
+            e.printStackTrace();
+        }
     }
 }
 

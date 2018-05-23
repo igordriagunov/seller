@@ -293,37 +293,6 @@ public class ItemRepository {
         return items;
     }
 
-//    public List<Item> Sale(String article) {
-//        List<Item> sale = new ArrayList<>();
-//
-//        try (Connection connection = DriverManager.getConnection(url)) {
-//            try (PreparedStatement statement = connection.prepareStatement(
-//                    "SELECT article, name, price, quantity FROM items" +
-//                            " WHERE LOWER(article) like ?;")) {
-//
-//                statement.setString(1, "%" + article.toLowerCase() + "%");
-//
-//                ResultSet resultSet = statement.executeQuery();
-//
-//                if (resultSet.next()) {
-//
-//                    sale.add(
-//                            new Item(
-//                                    resultSet.getString("article"),
-//                                    resultSet.getString("name"),
-//                                    resultSet.getInt("price"),
-//                                    resultSet.getInt("quantity")
-//                            )
-//                    );
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return sale;
-//    }
-
 
     private void init() {
         try (Connection connection = DriverManager.getConnection(url)) {

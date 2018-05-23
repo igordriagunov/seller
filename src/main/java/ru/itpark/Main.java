@@ -1,5 +1,6 @@
 package ru.itpark;
 
+import ru.itpark.domain.Item;
 import ru.itpark.domain.Sale;
 import ru.itpark.repository.ItemRepository;
 import ru.itpark.repository.SaleRepository;
@@ -98,7 +99,33 @@ public class Main {
 //                )
 //        );
 
-        System.out.println(saleRepository.saleGroupByItemArticle());
+//        saleRepository.addSale(
+//                new Sale(
+//                        "POIU1111",
+//                        2
+//                )
+//        );
+//
+//        saleRepository.addSale(
+//                new Sale(
+//                        "POIU1111",
+//                        3
+//                )
+//        );
+
+//        System.out.println(saleRepository.saleGroupByItemArticle());
+//        System.out.println(saleRepository.saleGroupByItemArticle());
+
+        saleRepository.deductQtyFromItems(
+                new Item(
+                        "QWER1234",
+                        "A6",
+                        33,
+                        1
+                )
+        );
+
+
 
     }
 }

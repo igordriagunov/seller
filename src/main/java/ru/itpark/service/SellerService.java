@@ -70,4 +70,5 @@ private final SaleRepository saleRepository;
     public List<Sale> saleGroupByItemArticle() {
         return saleRepository.saleGroupByItemArticle();
     }
+
 }
