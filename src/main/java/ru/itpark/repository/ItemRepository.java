@@ -30,6 +30,7 @@ public class ItemRepository {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
+            System.out.println("Товар с таким артикулом уже существует");
             e.printStackTrace();
         }
 

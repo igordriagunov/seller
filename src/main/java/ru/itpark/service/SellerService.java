@@ -9,8 +9,8 @@ import java.util.List;
 
 public class SellerService {
 
-private final ItemRepository itemRepository;
-private final SaleRepository saleRepository;
+    private final ItemRepository itemRepository;
+    private final SaleRepository saleRepository;
 
     public SellerService(ItemRepository itemRepository, SaleRepository saleRepository) {
         this.itemRepository = itemRepository;
@@ -29,11 +29,11 @@ private final SaleRepository saleRepository;
         itemRepository.removeByArticle(article);
     }
 
-    public List<Item> findAll(){
+    public List<Item> findAll() {
         return itemRepository.findAll();
     }
 
-    public List<Item> findByName(String name){
+    public List<Item> findByName(String name) {
         return itemRepository.findByName(name);
     }
 
@@ -46,7 +46,7 @@ private final SaleRepository saleRepository;
     }
 
     public List<Item> sortAllByQuantityASC() {
-       return itemRepository.sortAllByQuantityASC();
+        return itemRepository.sortAllByQuantityASC();
     }
 
     public List<Item> sortAllByQuantityDESC() {
@@ -63,14 +63,14 @@ private final SaleRepository saleRepository;
 
     public void addSale(Sale sale) {
         saleRepository.addSale(sale);
+        saleRepository.deductQtyFromItems(sale);
     }
-
 
     public List<Sale> saleGroupByItemArticle() {
         return saleRepository.saleGroupByItemArticle();
     }
 
-    public void deductQtyFromItems(Sale sale) {
-        saleRepository.deductQtyFromItems(sale);
-    }
+//    public void deductQtyFromItems(Sale sale) {
+//        saleRepository.deductQtyFromItems(sale);
+//    }
 }

@@ -39,7 +39,7 @@ public class SaleRepository {
         try (Connection connection = DriverManager.getConnection(url)) {
             try (PreparedStatement statement =
                          connection.prepareStatement(
-                                 "INSERT INTO sales (itemArticle, saleQuantity) VALUES (?,?)")) {
+                                 "INSERT INTO sales (itemArticle, saleQuantity) VALUES (?,?);")) {
 
                 statement.setString(1, sale.getItemArticle());
                 statement.setInt(2, sale.getSaleQuantity());
@@ -50,6 +50,7 @@ public class SaleRepository {
             e.printStackTrace();
         }
     }
+//TODO: saleGroupByItemArticle(String Article)
 
     public List<Sale> saleGroupByItemArticle() {
         List<Sale> list = new ArrayList<>();
@@ -58,7 +59,8 @@ public class SaleRepository {
             try (Statement statement = connection.createStatement()) {
 
 
-                ResultSet resultSet = statement.executeQuery("SELECT itemArticle, SUM(saleQuantity ) AS saleQuantity FROM sales GROUP BY itemArticle ;");
+                ResultSet resultSet = statement.executeQuery(
+                        "SELECT itemArticle, SUM(saleQuantity ) AS saleQuantity FROM sales GROUP BY itemArticle;");
 
                 while (resultSet.next()) {
 
@@ -80,16 +82,16 @@ public class SaleRepository {
 
     }
 
-    public void deductQtyFromItems (Sale sale) {
+    public void deductQtyFromItems(Sale sale) {
 
         try (Connection connection = DriverManager.getConnection(url)) {
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE items SET quantity= quantity - ? WHERE article=?;")){
+            try (PreparedStatement statement =
+                         connection.prepareStatement(
+                                 "UPDATE items SET quantity= quantity - ? WHERE article=?;"
+                         )) {
 
-                statement.setInt(1,sale.getSaleQuantity());
-//                statement.setString(2,item.getName());
-//                statement.setInt(3,item.getPrice());
-                statement.setString(2,sale.getItemArticle());
+                statement.setInt(1, sale.getSaleQuantity());
+                statement.setString(2, sale.getItemArticle());
 
                 statement.executeUpdate();
             }
