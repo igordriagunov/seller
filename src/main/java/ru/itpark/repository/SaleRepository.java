@@ -50,7 +50,33 @@ public class SaleRepository {
             e.printStackTrace();
         }
     }
-//TODO: saleGroupByItemArticle(String Article)
+
+    public List<Sale> findAllSalesByItemArticle(String itemArticle) {
+        List<Sale> list = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(url)) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT itemArticle, SUM(saleQuantity) AS saleQuantity FROM sales itemArticle WHERE itemArticle=?")) {
+
+                statement.setString(1, itemArticle);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+
+                    list.add(
+                            new Sale(
+                                    resultSet.getString("itemArticle"),
+                                    resultSet.getInt("saleQuantity")
+                            )
+                    );
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public List<Sale> saleGroupByItemArticle() {
         List<Sale> list = new ArrayList<>();

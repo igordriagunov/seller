@@ -29,8 +29,8 @@ public class SellerService {
         itemRepository.removeByArticle(article);
     }
 
-    public List<Item> findAll() {
-        return itemRepository.findAll();
+    public List<Item> findAllItems() {
+        return itemRepository.findAllItems();
     }
 
     public List<Item> findByName(String name) {
@@ -68,6 +68,10 @@ public class SellerService {
 
     public List<Sale> saleGroupByItemArticle() {
         return saleRepository.saleGroupByItemArticle();
+    }
+
+    public List<Sale> findAllSalesByItemArticle(String itemArticle) {
+        return saleRepository.findAllSalesByItemArticle(itemArticle);
     }
 
 //    public void deductQtyFromItems(Sale sale) {

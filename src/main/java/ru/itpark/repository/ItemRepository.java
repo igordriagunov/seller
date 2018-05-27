@@ -69,7 +69,7 @@ public class ItemRepository {
 
     }
 
-    public List<Item> findAll() {
+    public List<Item> findAllItems() {
         List<Item> items = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(url)) {

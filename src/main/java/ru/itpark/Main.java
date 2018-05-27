@@ -14,12 +14,12 @@ public class Main {
 
         SellerService service = new SellerService(itemRepository, saleRepository);
 
-        service.addSale(
-                new Sale(
-                        "POIU1111",
-                        1
-                )
-        );
+//        service.addSale(
+//                new Sale(
+//                        "POIU1111",
+//                        1
+//                )
+//        );
 
 
 //        repository.add(
@@ -31,7 +31,7 @@ public class Main {
 //                )
 //        );
 
-//        System.out.println(repository.findAll());
+//        System.out.println(repository.findAllItems());
 
 
 //        repository.update(
@@ -53,7 +53,7 @@ public class Main {
 //                )
 //        );
 
-//        System.out.println(repository.findAll());
+//        System.out.println(repository.findAllItems());
 
 //        repository.removeByArticle("ZXCV5555");
 
@@ -143,7 +143,7 @@ public class Main {
 //                )
 //        );
 //
-
+        System.out.println(service.findAllSalesByItemArticle());
 
     }
 }
