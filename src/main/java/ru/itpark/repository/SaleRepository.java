@@ -56,7 +56,7 @@ public class SaleRepository {
 
         try (Connection connection = DriverManager.getConnection(url)) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "SELECT itemArticle, SUM(saleQuantity) AS saleQuantity FROM sales itemArticle WHERE itemArticle=?")) {
+                    "SELECT id, itemArticle, SUM(saleQuantity) AS saleQuantity FROM sales itemArticle WHERE itemArticle=?")) {
 
                 statement.setString(1, itemArticle);
                 ResultSet resultSet = statement.executeQuery();
@@ -65,6 +65,7 @@ public class SaleRepository {
 
                     list.add(
                             new Sale(
+                                    resultSet.getInt("id"),
                                     resultSet.getString("itemArticle"),
                                     resultSet.getInt("saleQuantity")
                             )
@@ -78,7 +79,7 @@ public class SaleRepository {
         return list;
     }
 
-    public List<Sale> saleGroupByItemArticle() {
+    public List<Sale> allSalesGroupByItemArticle() {
         List<Sale> list = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(url)) {
@@ -86,12 +87,13 @@ public class SaleRepository {
 
 
                 ResultSet resultSet = statement.executeQuery(
-                        "SELECT itemArticle, SUM(saleQuantity ) AS saleQuantity FROM sales GROUP BY itemArticle;");
+                        "SELECT id,itemArticle, SUM(saleQuantity ) AS saleQuantity FROM sales GROUP BY itemArticle;");
 
                 while (resultSet.next()) {
 
                     list.add(
                             new Sale(
+                                    resultSet.getInt("id"),
                                     resultSet.getString("itemArticle"),
                                     resultSet.getInt("saleQuantity")
 

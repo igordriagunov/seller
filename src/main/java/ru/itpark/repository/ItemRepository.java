@@ -101,9 +101,39 @@ public class ItemRepository {
         List<Item> list = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(url)) {
-            try (PreparedStatement statement = connection.prepareStatement("SELECT article, name, price, quantity FROM items WHERE LOWER(name) LIKE ?;")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT article, name, price, quantity FROM items WHERE LOWER(name) LIKE ?;")) {
 
                 statement.setString(1, "%" + name.toLowerCase() + "%");
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+
+                    list.add(
+                            new Item(
+                                    resultSet.getString("article"),
+                                    resultSet.getString("name"),
+                                    resultSet.getInt("price"),
+                                    resultSet.getInt("quantity")
+                            )
+                    );
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Item> findItemByArticle(String article) {
+        List<Item> list = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(url)) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT article, name, price, quantity FROM items WHERE lower(article) LIKE ?;")) {
+
+                statement.setString(1, "%" + article.toLowerCase() + "%");
                 ResultSet resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {

@@ -17,15 +17,15 @@ public class SellerService {
         this.saleRepository = saleRepository;
     }
 
-    public void add(Item item) {
+    public void addItem(Item item) {
         itemRepository.add(item);
     }
 
-    public void update(Item item) {
-        itemRepository.add(item);
+    public void updateItemByArticle(Item item) {
+        itemRepository.update(item);
     }
 
-    public void removeByArticle(String article) {
+    public void removeItemByArticle(String article) {
         itemRepository.removeByArticle(article);
     }
 
@@ -33,31 +33,35 @@ public class SellerService {
         return itemRepository.findAllItems();
     }
 
-    public List<Item> findByName(String name) {
+    public List<Item> findItemByName(String name) {
         return itemRepository.findByName(name);
     }
 
-    public List<Item> sortAllByNameASC() {
+    public List<Item> findItemByArticle(String article) {
+        return itemRepository.findItemByArticle(article);
+    }
+
+    public List<Item> sortAllItemsByNameASC() {
         return itemRepository.sortAllByNameASC();
     }
 
-    public List<Item> sortAllByNameDESC() {
+    public List<Item> sortAllItemsByNameDESC() {
         return itemRepository.sortAllByNameDESC();
     }
 
-    public List<Item> sortAllByQuantityASC() {
+    public List<Item> sortAllItemsByQuantityASC() {
         return itemRepository.sortAllByQuantityASC();
     }
 
-    public List<Item> sortAllByQuantityDESC() {
+    public List<Item> sortAllItemsByQuantityDESC() {
         return itemRepository.sortAllByQuantityDESC();
     }
 
-    public List<Item> sortAllByPriceASC() {
+    public List<Item> sortAllItemsByPriceASC() {
         return itemRepository.sortAllByPriceASC();
     }
 
-    public List<Item> sortAllByPriceDESC() {
+    public List<Item> sortAllItemsByPriceDESC() {
         return itemRepository.sortAllByPriceDESC();
     }
 
@@ -66,8 +70,8 @@ public class SellerService {
         saleRepository.deductQtyFromItems(sale);
     }
 
-    public List<Sale> saleGroupByItemArticle() {
-        return saleRepository.saleGroupByItemArticle();
+    public List<Sale> findAllSalesGroupByItemArticle() {
+        return saleRepository.allSalesGroupByItemArticle();
     }
 
     public List<Sale> findAllSalesByItemArticle(String itemArticle) {
