@@ -9,13 +9,9 @@ import java.util.List;
 
 public class SellerService {
 
-    private final ItemRepository itemRepository;
-    private final SaleRepository saleRepository;
+    private final ItemRepository itemRepository = new ItemRepository();
+    private final SaleRepository saleRepository = new SaleRepository();
 
-    public SellerService(ItemRepository itemRepository, SaleRepository saleRepository) {
-        this.itemRepository = itemRepository;
-        this.saleRepository = saleRepository;
-    }
 
     public void addItem(Item item) {
         itemRepository.add(item);

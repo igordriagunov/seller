@@ -9,11 +9,30 @@ import ru.itpark.service.SellerService;
 public class Main {
     public static void main(String[] args) {
 
-        ItemRepository itemRepository = new ItemRepository("jdbc:sqlite:db.sqlite3");
-        SaleRepository saleRepository = new SaleRepository("jdbc:sqlite:db.sqlite3");
+        ItemRepository itemRepository;
+        SaleRepository saleRepository;
 
-        SellerService service = new SellerService(itemRepository, saleRepository);
+        SellerService service = new SellerService();
 
+
+        //        service.addItem(
+//                new Item(
+//                        "q2",
+//                        "pepsi",
+//                        59,
+//                        3
+//                )
+//        );
+
+//        service.addSale(
+//                new Sale(
+//                        0,
+//                        "q2",
+//                        6
+//                )
+//        );
+
+        System.out.println(service.findItemByArticle("ZXCV5555"));
 
     }
 }

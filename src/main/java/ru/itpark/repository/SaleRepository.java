@@ -8,24 +8,23 @@ import java.util.List;
 
 public class SaleRepository {
 
-    private String url;
+    private final String url = "jdbc:mysql://localhost:3306/sellerdb?verifyServerCertificate=false&useSSL=false&password=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC";
+    private final String user = "root";
+    private final String password = "password";
 
-    public SaleRepository(String url) {
-        this.url = url;
+    public SaleRepository() {
         initSales();
     }
 
-
     private void initSales() {
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (Statement statement = connection.createStatement()) {
-                statement.execute("CREATE table if not exists sales (\n" +
-                        "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-                        "itemArticle TEXT NOT NULL,\n" +
-                        "saleQuantity INTEGER CHECK (saleQuantity >= 0),\n" +
-                        "FOREIGN KEY (saleQuantity) REFERENCES items(quantity)\n" +
-                        ");");
+                statement.execute("create table if not exists sales (\n" +
+                        "id INT not null primary key AUTO_INCREMENT ,\n" +
+                        "itemArticle varchar(99) not null,\n" +
+                        "saleQuantity INT references items(quantity) \n" +
+                        "); ");
             }
 
         } catch (SQLException e) {
@@ -36,7 +35,7 @@ public class SaleRepository {
 
     public void addSale(Sale sale) {
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (PreparedStatement statement =
                          connection.prepareStatement(
                                  "INSERT INTO sales (itemArticle, saleQuantity) VALUES (?,?);")) {
@@ -54,7 +53,7 @@ public class SaleRepository {
     public List<Sale> findAllSalesByItemArticle(String itemArticle) {
         List<Sale> list = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "SELECT id, itemArticle, SUM(saleQuantity) AS saleQuantity FROM sales itemArticle WHERE itemArticle=?")) {
 
@@ -82,7 +81,7 @@ public class SaleRepository {
     public List<Sale> allSalesGroupByItemArticle() {
         List<Sale> list = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (Statement statement = connection.createStatement()) {
 
 
@@ -112,7 +111,7 @@ public class SaleRepository {
 
     public void deductQtyFromItems(Sale sale) {
 
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (PreparedStatement statement =
                          connection.prepareStatement(
                                  "UPDATE items SET quantity= quantity - ? WHERE article=?;"
